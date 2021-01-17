@@ -3505,7 +3505,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var api = axios__WEBPACK_IMPORTED_MODULE_1___default().create({
-  baseURL: "http://127.0.0.1:8000/api"
+  baseURL: "http://atlantico-fullstack-challenge.herokuapp.com/api"
 });
 api.interceptors.request.use( /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(config) {
