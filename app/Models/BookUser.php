@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class BookUser extends Model
+class BookUser extends Pivot
 {
     const STATUS_ONGOING = 'ongoing';
     const STATUS_LATE = 'late';

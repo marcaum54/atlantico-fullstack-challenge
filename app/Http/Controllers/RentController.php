@@ -11,15 +11,20 @@ class RentController extends Controller
 {
     public function store(StoreRentRequest $request)
     {
-        $user = User::where('uuid', $request->input('user_uuid'))->firstOrFail();
-        $book = Book::where('uuid', $request->input('book_uuid'))->firstOrFail();
+        $all = $request->all();
 
-        $attached = $user->books()->attach($book->id, [
+        $user_uuid = $all['user_uuid'];
+        $book_uuid = $all['book_uuid'];
+
+        $user = User::where('uuid', $user_uuid)->firstOrFail();
+        $book = Book::where('uuid', $book_uuid)->firstOrFail();
+
+        $user->books()->attach($book->id, ($pivot_data = [
             'status' => BookUser::STATUS_ONGOING,
-            'rented_at' => date('Y-m-d'),
-            'expirated_at' => $request->input('expirated_at'),
-        ]);
+            'rented_at' => $all['rented_at'],
+            'expirated_at' => date('Y-m-d', strtotime("{$all['rented_at']} + 7 days")),
+        ]));
 
-        return response()->json($attached);
+        return response()->json(compact('user_uuid', 'book_uuid') + $pivot_data);
     }
 }

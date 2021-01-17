@@ -9,15 +9,24 @@ use App\Models\BookUser;
 
 class DeliverController extends Controller
 {
-    public function store(StoreDeliverRequest $request)
+    public function update(StoreDeliverRequest $request)
     {
+        $user_uuid = $request->input('user_uuid');
+        $book_uuid = $request->input('book_uuid');
+
         $user = User::where('uuid', $request->input('user_uuid'))->firstOrFail();
         $book = Book::where('uuid', $request->input('book_uuid'))->firstOrFail();
 
-        $user->books()->attach($book->id, [
-            'status' => BookUser::STATUS_ONGOING,
-            'rented_at' => date('Y-m-d'),
-            'expirated_at' => $request->input('expirated_at'),
-        ]);
+        $pivot_data = [
+            'status' => BookUser::STATUS_PAID,
+            'delivered_at' => date('Y-m-d'),
+        ];
+
+        $user->books()
+            ->wherePivot('book_id', $book->id)
+            ->wherePivot('status', '<>', BookUser::STATUS_PAID)
+            ->update($pivot_data);
+
+        return response()->json(compact('user_uuid', 'book_uuid') + $pivot_data);
     }
 }

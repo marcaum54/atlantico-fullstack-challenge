@@ -13,6 +13,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return 'Atlântico Fullstack Challenge API: Online';
-});
+Route::view('/{path?}', 'app');

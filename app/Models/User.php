@@ -41,6 +41,21 @@ class User extends Authenticatable implements JWTSubject
 
     public function books()
     {
-        return $this->belongsToMany(Book::class)->using(BookUser::class)->withPivot(['status', 'rentend_at']);
+        return $this->belongsToMany(Book::class)->using(BookUser::class)->withPivot([
+            'status',
+            'rented_at',
+            'expirated_at',
+            'delivered_at',
+        ]);
+    }
+
+    public function allBooksStillWithMe()
+    {
+        return $this->books()->wherePivot('status', '<>', BookUser::STATUS_PAID);
+    }
+
+    public function isBookWithMe($book_id)
+    {
+        return $this->allBooksStillWithMe()->where('books.id', $book_id)->count() > 0;
     }
 }

@@ -27,4 +27,13 @@ class UserController extends Controller
 
         return response()->json($user);
     }
+
+    public function my_books($user_uuid)
+    {
+        $user = $this->model->where('uuid', $user_uuid)->firstOrFail();
+
+        $books = $user->books()->orderBy('book_user.id', 'DESC')->get();
+
+        return response()->json($books);
+    }
 }

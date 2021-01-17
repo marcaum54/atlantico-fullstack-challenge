@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Request;
-use App\Http\Requests\StoreUserRequest;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
-use stdClass;
 
 class Controller extends BaseController
 {
@@ -16,7 +13,7 @@ class Controller extends BaseController
 
     public function index()
     {
-        $rows = $this->model->paginate(20);
+        $rows = $this->model->all();
         return response()->json($rows);
     }
 

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\User;
 use App\Http\Requests\StoreBookRequest;
+use App\Models\BookUser;
+use Illuminate\Support\Facades\DB;
 
 class BookController extends Controller
 {
@@ -27,5 +30,20 @@ class BookController extends Controller
         return response()->json($book);
     }
 
-    public function rent()
+    public function available($user_uuid)
+    {
+        $user = User::where('uuid', $user_uuid)->firstOrFail();
+
+        $books_not_available = $user->allBooksStillWithMe()->pluck('books.id')->all();
+        $books = $this->model
+            ->whereNotIn('id', $books_not_available)
+            ->withCount([
+                'users',
+                'users as users_count' => function ($query) {
+                    $query->where('status', '<>', BookUser::STATUS_PAID);
+                }
+            ])->having('users_count', '<', DB::raw('`copies`'));
+
+        return response()->json($books->get());
+    }
 }

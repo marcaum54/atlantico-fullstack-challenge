@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBooksUsersTable extends Migration
+class CreateBookUserTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class CreateBooksUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('books_users', function (Blueprint $table) {
+        Schema::create('book_user', function (Blueprint $table) {
             $table->id();
 
             $table->unsignedBigInteger('user_id');
@@ -27,7 +27,6 @@ class CreateBooksUsersTable extends Migration
             $table->date('rented_at');
             $table->date('expirated_at');
             $table->date('delivered_at')->nullable();
-            $table->decimal('payment_value', 9, 3)->nullable();
         });
     }
 
@@ -38,6 +37,6 @@ class CreateBooksUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('books_users');
+        Schema::dropIfExists('book_user');
     }
 }
