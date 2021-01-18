@@ -11,6 +11,7 @@ import { getCurrentUser } from "../services/auth";
 
 const BookUserHistory = (props) => {
     const [disabled, setDisabled] = useState(false);
+    const [loaded, setLoaded] = useState(false);
     const [selectedBook, setSelectedBook] = useState({});
     const [selectedBookIndex, setSelectedBookIndex] = useState(null);
     const [books, setBooks] = useState([]);
@@ -22,6 +23,7 @@ const BookUserHistory = (props) => {
         setBooks([]);
         const response = await api.get(`/user/my-books/${currentUser.uuid}`);
         setBooks(response.data);
+        setLoaded(true);
     }
 
     useEffect(() => {
@@ -54,7 +56,11 @@ const BookUserHistory = (props) => {
 
     return (
         <Page title="My Books" menu={<NavMenu />}>
-            <Loader hide={books.length > 0} />
+            <Loader hide={books.length === 0 && loaded} />
+
+            {books.length === 0 && loaded && (
+                <h3 className="text-center">Empty</h3>
+            )}
 
             <div
                 id="modal-deliver-book"

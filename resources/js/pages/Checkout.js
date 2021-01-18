@@ -78,7 +78,7 @@ const Checkout = (props) => {
             })}
 
             {Object.keys(items).length === 0 && (
-                <h3 className="text-center">-- Empty --</h3>
+                <h3 className="text-center">Empty</h3>
             )}
 
             {Object.keys(items).length > 0 && (

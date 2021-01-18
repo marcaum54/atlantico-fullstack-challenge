@@ -2140,7 +2140,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _services_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/auth */ "./resources/js/services/auth.js");
+
 
 
 
@@ -2149,6 +2151,7 @@ __webpack_require__.r(__webpack_exports__);
 var Page = function Page(props) {
   var md = props.md,
       lg = props.lg;
+  var currentUser = (0,_services_auth__WEBPACK_IMPORTED_MODULE_2__.getCurrentUser)();
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     document.title = "".concat(props.title, " | Atl\xE2ntico Fullstack Challenge");
   });
@@ -2176,16 +2179,19 @@ var Page = function Page(props) {
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
                   className: "col",
                   children: props.menu
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-                  className: "col-3 text-right",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                  className: "col-5 text-right",
+                  children: ["Wecome,", " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("strong", {
+                    children: currentUser.name
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
                     to: "/logout",
+                    className: "ml-3",
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
                       type: "button",
                       className: "btn btn-sm btn-outline-danger",
                       children: "Logout"
                     })
-                  })
+                  })]
                 })]
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
@@ -2203,27 +2209,6 @@ var Page = function Page(props) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Page);
-
-/***/ }),
-
-/***/ "./resources/js/contexts/Checkout.js":
-/*!*******************************************!*\
-  !*** ./resources/js/contexts/Checkout.js ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => __WEBPACK_DEFAULT_EXPORT__
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
-var CheckoutContext = /*#__PURE__*/(0,react__WEBPACK_IMPORTED_MODULE_0__.createContext)({
-  items: {},
-  addItem: function addItem() {}
-});
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CheckoutContext);
 
 /***/ }),
 
@@ -2283,20 +2268,25 @@ var BookUserHistory = function BookUserHistory(props) {
       disabled = _useState2[0],
       setDisabled = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)({}),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      selectedBook = _useState4[0],
-      setSelectedBook = _useState4[1];
+      loaded = _useState4[0],
+      setLoaded = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)({}),
       _useState6 = _slicedToArray(_useState5, 2),
-      selectedBookIndex = _useState6[0],
-      setSelectedBookIndex = _useState6[1];
+      selectedBook = _useState6[0],
+      setSelectedBook = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(null),
       _useState8 = _slicedToArray(_useState7, 2),
-      books = _useState8[0],
-      setBooks = _useState8[1];
+      selectedBookIndex = _useState8[0],
+      setSelectedBookIndex = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)([]),
+      _useState10 = _slicedToArray(_useState9, 2),
+      books = _useState10[0],
+      setBooks = _useState10[1];
 
   var currentUser = (0,_services_auth__WEBPACK_IMPORTED_MODULE_8__.getCurrentUser)();
   var modalDeliverBook = $("#modal-deliver-book");
@@ -2319,8 +2309,9 @@ var BookUserHistory = function BookUserHistory(props) {
             case 3:
               response = _context2.sent;
               setBooks(response.data);
+              setLoaded(true);
 
-            case 5:
+            case 6:
             case "end":
               return _context2.stop();
           }
@@ -2375,7 +2366,10 @@ var BookUserHistory = function BookUserHistory(props) {
     title: "My Books",
     menu: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components_NavMenu__WEBPACK_IMPORTED_MODULE_7__.default, {}),
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components_Loader__WEBPACK_IMPORTED_MODULE_5__.default, {
-      hide: books.length > 0
+      hide: books.length === 0 && loaded
+    }), books.length === 0 && loaded && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
+      className: "text-center",
+      children: "Empty"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
       id: "modal-deliver-book",
       className: "modal",
@@ -2502,12 +2496,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/Input */ "./resources/js/components/Input.js");
 /* harmony import */ var _components_NavMenu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/NavMenu */ "./resources/js/components/NavMenu.js");
 /* harmony import */ var _components_Loader__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Loader */ "./resources/js/components/Loader.js");
-/* harmony import */ var _contexts_Checkout__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../contexts/Checkout */ "./resources/js/contexts/Checkout.js");
-/* harmony import */ var _services_api__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../services/api */ "./resources/js/services/api.js");
-/* harmony import */ var _services_checkout__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../services/checkout */ "./resources/js/services/checkout.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _services_auth__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../services/auth */ "./resources/js/services/auth.js");
+/* harmony import */ var _services_api__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../services/api */ "./resources/js/services/api.js");
+/* harmony import */ var _services_checkout__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../services/checkout */ "./resources/js/services/checkout.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _services_auth__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../services/auth */ "./resources/js/services/auth.js");
 
 
 
@@ -2544,10 +2537,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 var Books = function Books(props) {
-  var checkoutItems = (0,_services_checkout__WEBPACK_IMPORTED_MODULE_9__.getCheckoutItems)();
-  var currentUser = (0,_services_auth__WEBPACK_IMPORTED_MODULE_11__.getCurrentUser)();
+  var checkoutItems = (0,_services_checkout__WEBPACK_IMPORTED_MODULE_8__.getCheckoutItems)();
+  var currentUser = (0,_services_auth__WEBPACK_IMPORTED_MODULE_10__.getCurrentUser)();
 
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)({}),
       _useState2 = _slicedToArray(_useState, 2),
@@ -2593,7 +2585,7 @@ var Books = function Books(props) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _services_api__WEBPACK_IMPORTED_MODULE_8__.default.get("/book/available/".concat(currentUser.uuid));
+                return _services_api__WEBPACK_IMPORTED_MODULE_7__.default.get("/book/available/".concat(currentUser.uuid));
 
               case 2:
                 response = _context.sent;
@@ -2622,7 +2614,7 @@ var Books = function Books(props) {
     var newItems = _objectSpread(_objectSpread({}, items), item);
 
     setItems(newItems);
-    (0,_services_checkout__WEBPACK_IMPORTED_MODULE_9__.setCheckoutItems)(newItems);
+    (0,_services_checkout__WEBPACK_IMPORTED_MODULE_8__.setCheckoutItems)(newItems);
     delete books[selectedBookIndex];
     setBooks(books);
     setSelectedBookIndex(null);
@@ -2643,130 +2635,124 @@ var Books = function Books(props) {
     addCheckoutModal.modal("hide");
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_contexts_Checkout__WEBPACK_IMPORTED_MODULE_7__.default.Provider, {
-    value: {
-      items: items,
-      addItem: addItem
-    },
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components_Page__WEBPACK_IMPORTED_MODULE_3__.default, {
-      title: "Books",
-      menu: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components_NavMenu__WEBPACK_IMPORTED_MODULE_5__.default, {}),
-      hasLogout: true,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components_Loader__WEBPACK_IMPORTED_MODULE_6__.default, {
-        hide: books.length > 0
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-        id: "modal-add-checkout",
-        className: "modal",
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_components_Page__WEBPACK_IMPORTED_MODULE_3__.default, {
+    title: "Books",
+    menu: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components_NavMenu__WEBPACK_IMPORTED_MODULE_5__.default, {}),
+    hasLogout: true,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components_Loader__WEBPACK_IMPORTED_MODULE_6__.default, {
+      hide: books.length > 0
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+      id: "modal-add-checkout",
+      className: "modal",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+        className: "modal-dialog",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-          className: "modal-dialog",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-            className: "modal-content",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("form", {
-              onSubmit: handleCheckoutSubmit,
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                className: "modal-header",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("h5", {
-                  className: "modal-title",
-                  children: ["Rent a Book - ", selectedBook.title]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
-                  type: "button",
-                  className: "close",
-                  "data-dismiss": "modal",
-                  "aria-label": "Close",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
-                    "aria-hidden": "true",
-                    children: "\xD7"
-                  })
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                className: "modal-body",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                  className: "form-group",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
-                    htmlFor: "name",
-                    children: "Rental Date"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components_Input__WEBPACK_IMPORTED_MODULE_4__.default, {
-                    required: true,
-                    autoFocus: true,
-                    type: "date",
-                    id: "rented_at",
-                    name: "rented_at",
-                    className: "form-control",
-                    value: rentedAt,
-                    onChange: function onChange(e) {
-                      var date = moment__WEBPACK_IMPORTED_MODULE_10___default()(e.target.value);
-                      setRentendAt(e.target.value);
-                      setExpiratedAt(date.add(7, "days").format("YYYY-MM-DD"));
-                    }
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                  className: "form-group",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
-                    htmlFor: "name",
-                    children: "Delivery Date"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components_Input__WEBPACK_IMPORTED_MODULE_4__.default, {
-                    disabled: true,
-                    autoFocus: true,
-                    type: "text",
-                    id: "rented_at",
-                    name: "rented_at",
-                    className: "form-control",
-                    value: expiratedAt ? moment__WEBPACK_IMPORTED_MODULE_10___default()(expiratedAt).format("DD/MM/YYYY") : ""
-                  })]
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                className: "modal-footer",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
-                  type: "button",
-                  className: "btn btn-secondary",
-                  "data-dismiss": "modal",
-                  children: "Close"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
-                  type: "submit",
-                  className: "btn btn-primary",
-                  children: "Add book to Cart"
-                })]
-              })]
-            })
-          })
-        })
-      }), books.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("table", {
-        className: "table table-bordered mb-0",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("thead", {
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", {
-              children: "Title"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", {
-              width: "100",
-              className: "text-center",
-              children: "Copies"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", {
-              width: "80"
-            })]
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", {
-          children: books.map(function (book, index) {
-            return items[book.uuid] == null && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", {
-                children: book.title
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", {
-                className: "text-center",
-                children: book.copies - book.users_count
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", {
-                className: "text-center",
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
-                  onClick: function onClick() {
-                    handleRentClick(index);
-                  },
-                  className: "btn btn-sm btn-secondary",
-                  children: "Rent"
+          className: "modal-content",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("form", {
+            onSubmit: handleCheckoutSubmit,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+              className: "modal-header",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("h5", {
+                className: "modal-title",
+                children: ["Rent a Book - ", selectedBook.title]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
+                type: "button",
+                className: "close",
+                "data-dismiss": "modal",
+                "aria-label": "Close",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+                  "aria-hidden": "true",
+                  children: "\xD7"
                 })
               })]
-            }, "book-".concat(book.uuid));
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+              className: "modal-body",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                className: "form-group",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
+                  htmlFor: "name",
+                  children: "Rental Date"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components_Input__WEBPACK_IMPORTED_MODULE_4__.default, {
+                  required: true,
+                  autoFocus: true,
+                  type: "date",
+                  id: "rented_at",
+                  name: "rented_at",
+                  className: "form-control",
+                  value: rentedAt,
+                  onChange: function onChange(e) {
+                    var date = moment__WEBPACK_IMPORTED_MODULE_9___default()(e.target.value);
+                    setRentendAt(e.target.value);
+                    setExpiratedAt(date.add(7, "days").format("YYYY-MM-DD"));
+                  }
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+                className: "form-group",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
+                  htmlFor: "name",
+                  children: "Delivery Date"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components_Input__WEBPACK_IMPORTED_MODULE_4__.default, {
+                  disabled: true,
+                  autoFocus: true,
+                  type: "text",
+                  id: "rented_at",
+                  name: "rented_at",
+                  className: "form-control",
+                  value: expiratedAt ? moment__WEBPACK_IMPORTED_MODULE_9___default()(expiratedAt).format("DD/MM/YYYY") : ""
+                })]
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+              className: "modal-footer",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
+                type: "button",
+                className: "btn btn-secondary",
+                "data-dismiss": "modal",
+                children: "Close"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
+                type: "submit",
+                className: "btn btn-primary",
+                children: "Add book to Cart"
+              })]
+            })]
           })
-        })]
+        })
+      })
+    }), books.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("table", {
+      className: "table table-bordered mb-0",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("thead", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", {
+            children: "Title"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", {
+            width: "100",
+            className: "text-center",
+            children: "Copies"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", {
+            width: "80"
+          })]
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", {
+        children: books.map(function (book, index) {
+          return items[book.uuid] == null && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", {
+              children: book.title
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", {
+              className: "text-center",
+              children: book.copies - book.users_count
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", {
+              className: "text-center",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
+                onClick: function onClick() {
+                  handleRentClick(index);
+                },
+                className: "btn btn-sm btn-secondary",
+                children: "Rent"
+              })
+            })]
+          }, "book-".concat(book.uuid));
+        })
       })]
-    })
+    })]
   });
 };
 
@@ -2926,7 +2912,7 @@ var Checkout = function Checkout(props) {
       }, "".concat(i, "-errors"));
     }), Object.keys(items).length === 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
       className: "text-center",
-      children: "-- Empty --"
+      children: "Empty"
     }), Object.keys(items).length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("table", {
         className: "table table-bordered",
@@ -3504,8 +3490,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+var baseURL = window.location.href.indexOf("localhost") !== "-1" ? "http://localhost:8000/api" : "http://atlantico-fullstack-challenge.herokuapp.com/api";
 var api = axios__WEBPACK_IMPORTED_MODULE_1___default().create({
-  baseURL: "http://atlantico-fullstack-challenge.herokuapp.com/api"
+  baseURL: baseURL
 });
 api.interceptors.request.use( /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(config) {

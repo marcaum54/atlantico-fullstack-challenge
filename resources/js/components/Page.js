@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { getCurrentUser } from "../services/auth";
 
 const Page = (props) => {
     const { md, lg } = props;
+
+    const currentUser = getCurrentUser();
 
     useEffect(() => {
         document.title = `${props.title} | Atlântico Fullstack Challenge`;
@@ -27,8 +30,10 @@ const Page = (props) => {
                                 <div className="card-header bg-transparent">
                                     <div className="row">
                                         <div className="col">{props.menu}</div>
-                                        <div className="col-3 text-right">
-                                            <Link to="/logout">
+                                        <div className="col-5 text-right">
+                                            Wecome,{" "}
+                                            <strong>{currentUser.name}</strong>
+                                            <Link to="/logout" className="ml-3">
                                                 <button
                                                     type="button"
                                                     className="btn btn-sm btn-outline-danger"

@@ -16,7 +16,7 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $user = $this->model->create($request->all());
-        return response()->json($user);
+        return response()->json($user, 201);
     }
 
     public function update(UpdateUserRequest $request, $uuid)
