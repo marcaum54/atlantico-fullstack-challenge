@@ -56,7 +56,7 @@ const BookUserHistory = (props) => {
 
     return (
         <Page title="My Books" menu={<NavMenu />}>
-            <Loader hide={books.length === 0 && loaded} />
+            <Loader hide={books.length > 0 || loaded} />
 
             {books.length === 0 && loaded && (
                 <h3 className="text-center">Empty</h3>

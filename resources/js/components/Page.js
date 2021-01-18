@@ -31,7 +31,7 @@ const Page = (props) => {
                                     <div className="row">
                                         <div className="col">{props.menu}</div>
                                         <div className="col-5 text-right">
-                                            Wecome,{" "}
+                                            Welcome,{" "}
                                             <strong>{currentUser.name}</strong>
                                             <Link to="/logout" className="ml-3">
                                                 <button

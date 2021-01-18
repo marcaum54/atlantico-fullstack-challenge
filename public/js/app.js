@@ -2181,7 +2181,7 @@ var Page = function Page(props) {
                   children: props.menu
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
                   className: "col-5 text-right",
-                  children: ["Wecome,", " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("strong", {
+                  children: ["Welcome,", " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("strong", {
                     children: currentUser.name
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
                     to: "/logout",
@@ -2366,7 +2366,7 @@ var BookUserHistory = function BookUserHistory(props) {
     title: "My Books",
     menu: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components_NavMenu__WEBPACK_IMPORTED_MODULE_7__.default, {}),
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_components_Loader__WEBPACK_IMPORTED_MODULE_5__.default, {
-      hide: books.length === 0 && loaded
+      hide: books.length > 0 || loaded
     }), books.length === 0 && loaded && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h3", {
       className: "text-center",
       children: "Empty"
@@ -3490,7 +3490,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-var baseURL = window.location.href.indexOf("localhost") !== "-1" ? "http://localhost:8000/api" : "http://atlantico-fullstack-challenge.herokuapp.com/api";
+var baseURL = "http://atlantico-fullstack-challenge.herokuapp.com/api";
 var api = axios__WEBPACK_IMPORTED_MODULE_1___default().create({
   baseURL: baseURL
 });
