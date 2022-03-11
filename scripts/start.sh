@@ -19,6 +19,6 @@ composer install
 
 php artisan key:generate
 
-php artisan migrate --seed
+php artisan migrate:refresh --seed
 
 php artisan serve --host 0.0.0.0
